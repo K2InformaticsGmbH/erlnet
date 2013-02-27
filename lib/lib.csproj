@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{794FD980-C974-46B6-9ED1-F35B78D242F7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>lib</RootNamespace>
+    <AssemblyName>lib</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="echo\echo.cs" />
+    <Compile Include="epmd\epmd.cs" />
+    <Compile Include="lib\AbstractConnection.cs" />
+    <Compile Include="lib\AbstractNode.cs" />
+    <Compile Include="lib\BigInteger\BigInteger.cs" />
+    <Compile Include="lib\BufferedTcpClient.cs" />
+    <Compile Include="lib\GenericQueue.cs" />
+    <Compile Include="lib\Link.cs" />
+    <Compile Include="lib\Links.cs" />
+    <Compile Include="lib\OtpActor.cs" />
+    <Compile Include="lib\OtpActorMbox.cs" />
+    <Compile Include="lib\OtpActorSched.cs" />
+    <Compile Include="lib\OtpAuthException.cs" />
+    <Compile Include="lib\OtpConnection.cs" />
+    <Compile Include="lib\OtpCookedConnection.cs" />
+    <Compile Include="lib\OtpEpmd.Client.cs" />
+    <Compile Include="lib\OtpEpmd.Server.cs" />
+    <Compile Include="lib\OtpErlangAtom.cs" />
+    <Compile Include="lib\OtpErlangBinary.cs" />
+    <Compile Include="lib\OtpErlangBitstr.cs" />
+    <Compile Include="lib\OtpErlangBoolean.cs" />
+    <Compile Include="lib\OtpErlangByte.cs" />
+    <Compile Include="lib\OtpErlangChar.cs" />
+    <Compile Include="lib\OtpErlangDecodeException.cs" />
+    <Compile Include="lib\OtpErlangDouble.cs" />
+    <Compile Include="lib\OtpErlangException.cs" />
+    <Compile Include="lib\OtpErlangExit.cs" />
+    <Compile Include="lib\OtpErlangExternalFun.cs" />
+    <Compile Include="lib\OtpErlangFloat.cs" />
+    <Compile Include="lib\OtpErlangFun.cs" />
+    <Compile Include="lib\OtpErlangInt.cs" />
+    <Compile Include="lib\OtpErlangList.cs" />
+    <Compile Include="lib\OtpErlangLong.cs" />
+    <Compile Include="lib\OtpErlangObject.cs" />
+    <Compile Include="lib\OtpErlangPid.cs" />
+    <Compile Include="lib\OtpErlangPort.cs" />
+    <Compile Include="lib\OtpErlangRangeException.cs" />
+    <Compile Include="lib\OtpErlangRef.cs" />
+    <Compile Include="lib\OtpErlangShort.cs" />
+    <Compile Include="lib\OtpErlangString.cs" />
+    <Compile Include="lib\OtpErlangTuple.cs" />
+    <Compile Include="lib\OtpErlangUInt.cs" />
+    <Compile Include="lib\OtpErlangUShort.cs" />
+    <Compile Include="lib\OtpException.cs" />
+    <Compile Include="lib\OtpExternal.cs" />
+    <Compile Include="lib\OtpInputStream.cs" />
+    <Compile Include="lib\OtpLocalNode.cs" />
+    <Compile Include="lib\OtpMbox.cs" />
+    <Compile Include="lib\OtpMD5.cs" />
+    <Compile Include="lib\OtpMsg.cs" />
+    <Compile Include="lib\OtpNode.cs" />
+    <Compile Include="lib\OtpNodeStatus.cs" />
+    <Compile Include="lib\OtpOutputStream.cs" />
+    <Compile Include="lib\OtpPeer.cs" />
+    <Compile Include="lib\OtpSelf.cs" />
+    <Compile Include="lib\OtpServer.cs" />
+    <Compile Include="lib\ThreadBase.cs" />
+    <Compile Include="ping\ping.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

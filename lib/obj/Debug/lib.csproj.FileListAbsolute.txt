@@ -1,0 +1,6 @@
+D:\Work\Git\Erlang.NET\lib\bin\Debug\lib.dll
+D:\Work\Git\Erlang.NET\lib\bin\Debug\lib.pdb
+D:\Work\Git\Erlang.NET\lib\obj\Debug\ResolveAssemblyReference.cache
+D:\Work\Git\Erlang.NET\lib\obj\Debug\lib.dll
+D:\Work\Git\Erlang.NET\lib\obj\Debug\lib.pdb
+D:\Work\Git\Erlang.NET\lib\bin\Debug\log4net.dll
