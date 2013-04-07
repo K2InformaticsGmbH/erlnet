@@ -28,7 +28,7 @@ namespace console
 
         static void Main(string[] args)
         {
-            OtpErlangObject[] mfaList = new OtpErlangObject[3];
+            OtpErlangObject[] mfaTuple = new OtpErlangObject[4];
             OtpErlangObject[] mfaArgs = new OtpErlangObject[4];
 
             // args for fun
@@ -46,12 +46,13 @@ namespace console
             mfaArgs[3] = new OtpErlangTuple(pswdTuple);
 
             // mod and fun and args
-            mfaList[0] = new OtpErlangAtom("imem_sec");
-            mfaList[1] = new OtpErlangAtom("authenticate");
-            mfaList[2] = new OtpErlangList(mfaArgs);
+            mfaTuple[0] = new OtpErlangAtom("undefined");       // ToDo: should be OtpErlangRef(..)
+            mfaTuple[1] = new OtpErlangAtom("imem_sec");
+            mfaTuple[2] = new OtpErlangAtom("authenticate");
+            mfaTuple[3] = new OtpErlangList(mfaArgs);
 
             // imem_sec, authenticate, [undefined, adminSessionId, User, {pwdmd5, PswdMD5}]
-            OtpErlangList erlMfa = new OtpErlangList(mfaList);
+            OtpErlangTuple erlMfa = new OtpErlangTuple(mfaTuple);
 
             OtpOutputStream otps = new OtpOutputStream(erlMfa);
             byte[] buf = otps.GetBuffer();
