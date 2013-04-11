@@ -52,9 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Erlnet.cs" />
     <Compile Include="echo\echo.cs" />
     <Compile Include="epmd\epmd.cs" />
+    <Compile Include="Imem.cs" />
     <Compile Include="lib\AbstractConnection.cs" />
     <Compile Include="lib\AbstractNode.cs" />
     <Compile Include="lib\BigInteger\BigInteger.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="lib\OtpSelf.cs" />
     <Compile Include="lib\OtpServer.cs" />
     <Compile Include="lib\ThreadBase.cs" />
+    <Compile Include="Mpro.cs" />
     <Compile Include="ping\ping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
