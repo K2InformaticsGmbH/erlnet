@@ -1,5 +1,7 @@
 lib/bin/Debug/
 lib/obj/
-*.dll
+console/bin/
+console/obj/
+src/
 *.swp
 *.suo
