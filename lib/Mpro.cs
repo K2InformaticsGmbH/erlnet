@@ -67,7 +67,7 @@ namespace Erlang.NET
             for (int i=0; i<mfaArgs.Length ; ++i)
                 mfaArgs[i] = new OtpErlangString((string)argsRest[i]);
 
-            OtpErlangTuple res = (OtpErlangTuple)CallMFASync(stream, "mpro_dal_prov", "listDestinationChannels", mfaArgs);
+            OtpErlangTuple res = (OtpErlangTuple)CallMFASync(stream, "mpro_dal_prov", fun, mfaArgs);
             if (((OtpErlangAtom)res.elementAt(0)).atomValue() == "ok")
                 return TranslateResult(res.elementAt(1));
             else
