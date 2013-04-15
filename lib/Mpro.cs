@@ -7,6 +7,11 @@ using System.Collections;
 
 namespace Erlang.NET
 {
+    public enum MproType
+    {
+        MproString = 1
+    };
+
     public class Mpro : Imem
     {
         protected Mpro(NetworkStream _stream) : base(_stream) { }
@@ -79,29 +84,40 @@ namespace Erlang.NET
             ArrayList res = new ArrayList();
 
             if (result is OtpErlangTuple)
-            {
-                OtpErlangTuple resTuple = (OtpErlangTuple)result;
-                foreach (OtpErlangObject erlO in resTuple.elements())
-                {
-                    if (erlO is OtpErlangTuple || (erlO is OtpErlangList && ((OtpErlangList)erlO).arity() > 0))
-                        res.Add(TranslateResult(erlO));
-                    else
-                        res.Add(erlO.ToString());
-                }
-            }
+                TranslateToArray(res, ((OtpErlangTuple)result).elements());
             else if (result is OtpErlangList)
-            {                
-                OtpErlangList resList = (OtpErlangList)result;
-                foreach (OtpErlangObject erlO in resList.elements())
-                {
-                    if (erlO is OtpErlangTuple || (erlO is OtpErlangList && ((OtpErlangList)erlO).arity() > 0))
-                        res.Add(TranslateResult(erlO));
-                    else
-                        res.Add(erlO.ToString());
-                }
-            }
+                TranslateToArray(res, ((OtpErlangList)result).elements());
 
             return res;
+        }
+
+        private static void TranslateToArray(ArrayList res, OtpErlangObject[] elements)
+        {
+            foreach (OtpErlangObject erlO in elements)
+            {
+                // Leaf
+                if ((erlO is OtpErlangTuple)
+                  && (((OtpErlangTuple)erlO).arity() == 2)
+                  && (((OtpErlangTuple)erlO).elementAt(0) is OtpErlangLong)) 
+                {
+                    MproType mtyp = (MproType)((OtpErlangLong)((OtpErlangTuple)erlO).elementAt(0)).intValue();
+                    OtpErlangObject oeo = ((OtpErlangTuple)erlO).elementAt(1);
+                    switch (mtyp) {
+                        case MproType.MproString:
+                            if (oeo is OtpErlangString)
+                                res.Add(((OtpErlangString)oeo).stringValue());
+                            else if (oeo is OtpErlangList && ((OtpErlangList)oeo).arity() == 0)
+                                res.Add("");
+                            break;
+                        default:
+                            throw new Exception("Unknown type " + erlO.ToString());
+                    }
+                }
+                else if (erlO is OtpErlangTuple || (erlO is OtpErlangList && ((OtpErlangList)erlO).arity() > 0))
+                    res.Add(TranslateResult(erlO));
+                else
+                    res.Add(erlO.ToString());
+            }
         }
     }
 }
