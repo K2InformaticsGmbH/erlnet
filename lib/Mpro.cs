@@ -95,7 +95,7 @@ namespace Erlang.NET
         {
             foreach (OtpErlangObject erlO in elements)
             {
-                // Leaf
+                // Leaf node
                 if ((erlO is OtpErlangTuple)
                   && (((OtpErlangTuple)erlO).arity() == 2)
                   && (((OtpErlangTuple)erlO).elementAt(0) is OtpErlangLong)) 
