@@ -29,7 +29,7 @@ namespace console
 
         static void Main(string[] args)
         {
-            Mpro mpro = Mpro.Connect("localhost", 8124);
+            Mpro mpro = Mpro.Connect("localhost", 8125);
             mpro.Authenticate("admin", "change_on_install");
             mpro.Login();
             ArrayList l = mpro.listDestinationChannels("smpp");
