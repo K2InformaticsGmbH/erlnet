@@ -28,7 +28,7 @@ using System.Threading;
 using log4net;
 using log4net.Config;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * Maintains a connection between a Java process and a remote Erlang, Java or C

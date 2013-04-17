@@ -19,7 +19,7 @@
  */
 using System;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     internal class OtpMD5
     {

@@ -18,7 +18,7 @@
  */
 using System;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     public class OtpActorMbox : OtpMbox
     {

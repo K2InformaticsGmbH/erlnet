@@ -27,7 +27,7 @@ using System.Reflection;
 using System.Text;
 using log4net;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * Provides methods for registering, unregistering and looking up nodes with the

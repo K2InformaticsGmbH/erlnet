@@ -19,7 +19,7 @@
  */
 using System;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * Provides a Java representation of Erlang ports.

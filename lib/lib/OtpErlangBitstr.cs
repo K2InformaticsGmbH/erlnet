@@ -23,7 +23,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * Provides a Java representation of Erlang bitstrs. An Erlang bitstr is an

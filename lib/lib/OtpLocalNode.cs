@@ -21,7 +21,7 @@ using System;
 using System.IO;
 using System.Net.Sockets;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * This class represents local node types. It is used to group the node types

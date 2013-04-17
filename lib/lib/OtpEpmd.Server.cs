@@ -26,7 +26,7 @@ using System.Reflection;
 using System.Text;
 using log4net;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     public partial class OtpEpmd : ThreadBase
     {

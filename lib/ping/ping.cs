@@ -17,11 +17,11 @@
  * %CopyrightEnd%
  */
 using System;
-using Erlang.NET;
+using K2Informatics.Erlnet;
 using log4net;
 using log4net.Config;
 
-namespace Erlang.NET.Test
+namespace K2Informatics.Erlnet.Test
 {
     public class Ping
     {

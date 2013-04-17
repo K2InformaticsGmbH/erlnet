@@ -19,7 +19,7 @@
  */
 using System;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * Exception raised when an attempt is made to create an Erlang term with data

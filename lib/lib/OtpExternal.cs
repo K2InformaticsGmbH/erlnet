@@ -18,7 +18,7 @@
  * %CopyrightEnd%
  */
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * Provides a collection of constants used when encoding and decoding Erlang

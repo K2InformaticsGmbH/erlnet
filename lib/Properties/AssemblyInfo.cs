@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Erlang.NET")]
+[assembly: AssemblyTitle("K2Informatics.Erlnet")]
 [assembly: AssemblyDescription("Erlang OTP imem interface")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("K2 Informatics GmbH")]
-[assembly: AssemblyProduct("SBS")]
+[assembly: AssemblyProduct("IMEM")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

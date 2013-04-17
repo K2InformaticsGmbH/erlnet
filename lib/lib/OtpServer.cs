@@ -19,7 +19,7 @@
  */
 using System;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * Represents a local OTP client or server node. It is used when you want other

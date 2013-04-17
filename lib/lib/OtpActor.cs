@@ -19,7 +19,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     public abstract class OtpActor
     {

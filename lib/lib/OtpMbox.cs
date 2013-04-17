@@ -20,7 +20,7 @@
 using System;
 using System.Threading;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * <p>

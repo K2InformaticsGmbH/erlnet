@@ -5,9 +5,15 @@ using System.Text;
 using System.Net.Sockets;
 using System.Threading;
 using System.IO;
+using System.Collections;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
+    public enum ErlType
+    {
+        EString = 1
+    };
+
     public class Erlnet
     {
         /// <summary>
@@ -70,6 +76,48 @@ namespace Erlang.NET
             }
             else
                 return resObj;
+        }
+
+        public static ArrayList TranslateResult(OtpErlangObject result)
+        {
+            ArrayList res = new ArrayList();
+
+            if (result is OtpErlangTuple)
+                TranslateToArray(res, ((OtpErlangTuple)result).elements());
+            else if (result is OtpErlangList)
+                TranslateToArray(res, ((OtpErlangList)result).elements());
+
+            return res;
+        }
+
+        private static void TranslateToArray(ArrayList res, OtpErlangObject[] elements)
+        {
+            foreach (OtpErlangObject erlO in elements)
+            {
+                // Leaf node
+                if ((erlO is OtpErlangTuple)
+                  && (((OtpErlangTuple)erlO).arity() == 2)
+                  && (((OtpErlangTuple)erlO).elementAt(0) is OtpErlangLong))
+                {
+                    ErlType mtyp = (ErlType)((OtpErlangLong)((OtpErlangTuple)erlO).elementAt(0)).intValue();
+                    OtpErlangObject oeo = ((OtpErlangTuple)erlO).elementAt(1);
+                    switch (mtyp)
+                    {
+                        case ErlType.EString:
+                            if (oeo is OtpErlangString)
+                                res.Add(((OtpErlangString)oeo).stringValue());
+                            else if (oeo is OtpErlangList && ((OtpErlangList)oeo).arity() == 0)
+                                res.Add("");
+                            break;
+                        default:
+                            throw new Exception("Unknown type " + erlO.ToString());
+                    }
+                }
+                else if (erlO is OtpErlangTuple || (erlO is OtpErlangList && ((OtpErlangList)erlO).arity() > 0))
+                    res.Add(TranslateResult(erlO));
+                else
+                    res.Add(erlO.ToString());
+            }
         }
     }
 }

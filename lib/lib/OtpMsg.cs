@@ -21,7 +21,7 @@ using System;
 using System.IO;
 using System.Net;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * <p>

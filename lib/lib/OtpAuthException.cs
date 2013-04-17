@@ -19,7 +19,7 @@
  */
 using System;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * Exception raised when a node attempts to establish a communication channel

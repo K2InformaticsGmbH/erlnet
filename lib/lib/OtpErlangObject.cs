@@ -19,7 +19,7 @@
  */
 using System;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * Base class of the Erlang data type classes. This class is used to represent

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Erlang.NET;
+using K2Informatics.Erlnet;
 using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Collections;
@@ -11,7 +11,7 @@ namespace console
 {
     class Program
     {
-        public static string CalculateMD5Hash(string input)
+        /* public static string CalculateMD5Hash(string input)
         {
             // step 1, calculate MD5 hash from input
             MD5 md5 = MD5.Create();
@@ -25,7 +25,7 @@ namespace console
                 sb.Append(hash[i].ToString("X2"));
             }
             return sb.ToString();
-        }
+        }*/
 
         static void Main(string[] args)
         {

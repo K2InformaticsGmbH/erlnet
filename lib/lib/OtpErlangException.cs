@@ -18,7 +18,7 @@
  * %CopyrightEnd%
  */
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * Base class for the other OTP erlang exception classes.

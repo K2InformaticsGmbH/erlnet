@@ -20,7 +20,7 @@
 using System;
 using System.Threading;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * This class implements a generic FIFO queue. There is no upper bound on the

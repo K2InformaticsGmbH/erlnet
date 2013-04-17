@@ -21,7 +21,7 @@ using System;
 using System.IO;
 using System.Net.Sockets;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * Maintains a connection between a Java process and a remote Erlang, Java or C

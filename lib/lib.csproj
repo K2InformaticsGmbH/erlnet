@@ -8,8 +8,8 @@
     <ProjectGuid>{794FD980-C974-46B6-9ED1-F35B78D242F7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>K2Informatics.Erlang.NET</RootNamespace>
-    <AssemblyName>Erlang.NET</AssemblyName>
+    <RootNamespace>K2Informatics</RootNamespace>
+    <AssemblyName>erlnet</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -55,7 +55,6 @@
     <Compile Include="Erlnet.cs" />
     <Compile Include="echo\echo.cs" />
     <Compile Include="epmd\epmd.cs" />
-    <Compile Include="Imem.cs" />
     <Compile Include="lib\AbstractConnection.cs" />
     <Compile Include="lib\AbstractNode.cs" />
     <Compile Include="lib\BigInteger\BigInteger.cs" />
@@ -111,7 +110,6 @@
     <Compile Include="lib\OtpSelf.cs" />
     <Compile Include="lib\OtpServer.cs" />
     <Compile Include="lib\ThreadBase.cs" />
-    <Compile Include="Mpro.cs" />
     <Compile Include="ping\ping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

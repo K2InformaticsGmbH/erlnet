@@ -23,7 +23,7 @@ using System.Reflection;
 using log4net;
 using log4net.Config;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     public class OtpActorSched : ThreadBase
     {

@@ -19,7 +19,7 @@
  */
 using System;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     [Serializable]
     public class OtpErlangExternalFun : OtpErlangObject

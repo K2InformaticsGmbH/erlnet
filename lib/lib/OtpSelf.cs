@@ -22,7 +22,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * Represents an OTP node. It is used to connect to remote nodes or accept

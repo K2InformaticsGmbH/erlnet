@@ -20,7 +20,7 @@
 using System;
 using System.Text;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * Provides a Java representation of Erlang tuples. Tuples are created from one

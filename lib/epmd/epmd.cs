@@ -20,11 +20,11 @@ using System;
 using System.ComponentModel;
 using System.Configuration.Install;
 using System.ServiceProcess;
-using Erlang.NET;
+using K2Informatics.Erlnet;
 using log4net;
 using log4net.Config;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
 #if WIN32
     public class Epmd : ServiceBase

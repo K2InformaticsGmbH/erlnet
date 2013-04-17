@@ -22,7 +22,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * Provides a Java representation of Erlang lists. Lists are created from zero

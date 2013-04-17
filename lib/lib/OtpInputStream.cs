@@ -22,7 +22,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Text;
 
-namespace Erlang.NET
+namespace K2Informatics.Erlnet
 {
     /**
      * Provides a stream for decoding Erlang terms from external format.
