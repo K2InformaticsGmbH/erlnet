@@ -67,15 +67,17 @@ namespace K2Informatics.Erlnet
             OtpErlangTuple res = (OtpErlangTuple)OtpErlangObject.decode(new OtpInputStream(resp.GetBuffer()));
             Console.WriteLine("RX "+res.elementAt(0).ToString());
             OtpErlangObject resObj = res.elementAt(1);
-            if (resObj is OtpErlangTuple
-                && ((OtpErlangTuple)resObj).elementAt(0) is OtpErlangAtom
-                && ((OtpErlangAtom)((OtpErlangTuple)resObj).elementAt(0)).atomValue() == "error")
-            {
-                OtpErlangTuple excp = (OtpErlangTuple)((OtpErlangTuple)resObj).elementAt(1);
-                throw new Exception(excp.ToString());
-            }
-            else
-                return resObj;
+            return resObj;
+        }
+
+        public static OtpErlangObject UnwrapResult(OtpErlangObject obj)
+        {
+            if (obj is OtpErlangTuple
+                && ((OtpErlangTuple)obj).arity() == 2
+                && ((OtpErlangTuple)obj).elementAt(0) is OtpErlangAtom
+                && ((OtpErlangAtom)((OtpErlangTuple)obj).elementAt(0)).atomValue() == "ok")
+                return ((OtpErlangTuple)obj).elementAt(1);
+            else return obj;
         }
 
         public static ArrayList TranslateResult(OtpErlangObject result)

@@ -121,4 +121,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetPath) $(ProjectDir)..\..\erlimemnet\lib\</PostBuildEvent>
+  </PropertyGroup>
 </Project>
