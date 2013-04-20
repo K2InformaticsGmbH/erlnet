@@ -33,7 +33,7 @@ namespace K2Informatics.Erlnet
      */
     public class OtpInputStream : MemoryStream
     {
-        public const int DECODE_INT_LISTS_AS_STRINGS = 1;
+        public const int DECODE_INT_LISTS_AS_STRINGS = 1;      
 
         private readonly int flags;
 
@@ -1156,6 +1156,11 @@ namespace K2Informatics.Erlnet
                     return OtpErlangString.newString(strbuf);
                 case OtpExternal.nilTag:
                     return "";
+                case OtpExternal.binTag:                        // UTF8-PATCH
+                    len = read4BE();
+                    byte[] bin = new byte[len];
+                    this.readN(bin);
+                    return Encoding.UTF8.GetString(bin);                
                 case OtpExternal.listTag: // List when unicode +
                     len = read4BE();
                     StringBuilder sb = new StringBuilder();

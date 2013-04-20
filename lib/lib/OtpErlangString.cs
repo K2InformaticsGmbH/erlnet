@@ -214,14 +214,15 @@ namespace K2Informatics.Erlnet
 
         /**
          * Construct a String from a Latin-1 (ISO-8859-1) encoded byte array,
-         * if Latin-1 is available, otherwise use the default encoding. 
+         * if UTF-8 is available, otherwise use the default encoding.       // UTF8-PATCH
          *
          */
         public static String newString(byte[] bytes)
         {
             try
             {
-                return Encoding.GetEncoding("iso-8859-1").GetString(bytes);
+                // return Encoding.GetEncoding("iso-8859-1").GetString(bytes);
+                return Encoding.GetEncoding("utf-8").GetString(bytes);      // UTF8-PATCH
             }
             catch (ArgumentException)
             {

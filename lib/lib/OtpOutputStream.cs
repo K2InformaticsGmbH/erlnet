@@ -760,47 +760,27 @@ namespace K2Informatics.Erlnet
         }
 
         /**
-         * Write a string to the stream.
+         * Write a string to the stream. Transport as binary.                   // UTF8-PATCH
          * 
          * @param s
          *            the string to write.
          */
         public void write_string(String s)
         {
-            int len = s.Length;
+            byte[] bytebuf = Encoding.UTF8.GetBytes(s);                         // UTF8-PATCH
+            write_binary(bytebuf);
+        }
 
-            switch (len)
-            {
-                case 0:
-                    write_nil();
-                    break;
-                default:
-                    if (len <= 65535 && is8bitString(s)) // 8-bit string
-                    {
-                        try
-                        {
-                            byte[] bytebuf = Encoding.GetEncoding("iso-8859-1").GetBytes(s);
-                            write1(OtpExternal.stringTag);
-                            write2BE(len);
-                            writeN(bytebuf);
-                        }
-                        catch (EncoderFallbackException)
-                        {
-                            write_nil(); // it should never ever get here...
-                        }
-                    }
-                    else // unicode or longer, must code as list
-                    {
-                        int[] codePoints = OtpErlangString.stringToCodePoints(s);
-                        write_list_head(codePoints.Length);
-                        foreach (int codePoint in codePoints)
-                        {
-                            write_int(codePoint);
-                        }
-                        write_nil();
-                    }
-                    break;
-            }
+        public void write_string(String s, Encoding e)
+        {
+            byte[] bytebuf = e.GetBytes(s);                                     // UTF8-PATCH
+            write_binary(bytebuf);
+        }
+
+        public void write_string(String s, String e)
+        {
+            byte[] bytebuf = Encoding.GetEncoding(e).GetBytes(s);               // UTF8-PATCH
+            write_binary(bytebuf);
         }
 
         private bool is8bitString(String s)
