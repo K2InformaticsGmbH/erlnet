@@ -87,6 +87,18 @@ namespace K2Informatics.Erlnet
         }
 
         /**
+         * Get the printable version of the string contained in this object.
+         * 
+         * @return the string contained in this object, quoted.
+         * 
+         * @see #stringValue
+         */
+        public override String ToString()
+        {
+            return "\"" + Encoding.UTF8.GetString(bin) + "\"";
+        }
+
+        /**
          * Convert this binary to the equivalent Erlang external representation.
          * 
          * @param buf
