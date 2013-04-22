@@ -108,6 +108,8 @@ namespace K2Informatics.Erlnet
                         case ErlType.EString:
                             if (oeo is OtpErlangString)
                                 res.Add(((OtpErlangString)oeo).stringValue());
+                            else if (oeo is OtpErlangBinary)
+                                res.Add(((OtpErlangBinary)oeo).stringValue());
                             else if (oeo is OtpErlangList && ((OtpErlangList)oeo).arity() == 0)
                                 res.Add("");
                             break;

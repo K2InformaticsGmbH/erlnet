@@ -18,6 +18,7 @@
  * %CopyrightEnd%
  */
 using System;
+using System.Text;
 
 namespace K2Informatics.Erlnet
 {
@@ -70,6 +71,19 @@ namespace K2Informatics.Erlnet
         public OtpErlangBinary(Object o)
             : base(o)
         {
+        }
+
+        /**
+        * Get the actual string contained in this object.
+        * 
+        * @return the raw string contained in this object, without regard to Erlang
+        *         quoting rules.
+        * 
+        * @see #toString
+        */
+        public String stringValue()
+        {
+            return Encoding.UTF8.GetString(bin);
         }
 
         /**
