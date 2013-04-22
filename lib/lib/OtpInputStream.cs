@@ -38,6 +38,14 @@ namespace K2Informatics.Erlnet
         private readonly int flags;
 
         /**
+        * @param
+        */
+        public OtpInputStream()
+            : base()
+        {
+        }
+
+        /**
          * @param buf
          */
         public OtpInputStream(byte[] buf)
@@ -1310,7 +1318,7 @@ namespace K2Informatics.Erlnet
                     return new OtpErlangFun(this);
 
                 default:
-                    throw new OtpErlangDecodeException("Uknown data type: " + tag);
+                    throw new OtpErlangDecodeException("Unknown data type: " + tag);
             }
         }
     }

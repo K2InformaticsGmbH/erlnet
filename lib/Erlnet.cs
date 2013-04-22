@@ -57,11 +57,17 @@ namespace K2Informatics.Erlnet
             buf = new byte[1024];
             MemoryStream resp = new MemoryStream();
             int readCount = 0;
+            bool waitForMore = false;
             do
             {
                 readCount = stream.Read(buf, 0, buf.Length);
                 resp.Write(buf, 0, readCount);
-            } while (stream.DataAvailable);
+                waitForMore = stream.DataAvailable;
+                if(!waitForMore ) {
+                    try { OtpErlangObject.decode(new OtpInputStream(resp.GetBuffer())); }
+                    catch (OtpErlangDecodeException) { waitForMore = true; }
+                }
+            } while (waitForMore);
 
             // rebuild term
             OtpErlangTuple res = (OtpErlangTuple)OtpErlangObject.decode(new OtpInputStream(resp.GetBuffer()));
