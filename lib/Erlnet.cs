@@ -14,6 +14,13 @@ namespace K2Informatics.Erlnet
         EString = 1
     };
 
+    public class ErlnetException : Exception
+    {
+        public ErlnetException() { }
+        public ErlnetException(string message) : base(message) { }
+        public ErlnetException(string message, Exception innerException) : base(message, innerException) { }
+    }
+
     public class Erlnet
     {
         /// <summary>
@@ -39,14 +46,25 @@ namespace K2Informatics.Erlnet
             mfaArray[2] = new OtpErlangAtom(function);
             if (null != args)
                 mfaArray[3] = new OtpErlangList(args);
+            else
+                mfaArray[3] = new OtpErlangList();
 
             OtpErlangTuple mfaTouple = new OtpErlangTuple(mfaArray);
             eouts = new OtpOutputStream();
             mfaTouple.encode(eouts);
 
-            byte[] buf = new byte[eouts.Length + 1];
-            buf[0] = 131; // missing protocol id added to front
-            Array.Copy(eouts.GetBuffer(), 0, buf, 1, buf.Length - 1); // rest of the buffer copied
+            uint payloadLen = (uint)(eouts.Length + 1);
+            byte[] buf = new byte[eouts.Length + 5];
+
+            // added payload size (including protocol id byte)
+            // and the missing protocol id byte after it
+            buf[0] = (byte)((payloadLen & 0xFF000000) >> 24);
+            buf[1] = (byte)((payloadLen & 0x00FF0000) >> 16);
+            buf[2] = (byte)((payloadLen & 0x0000FF00) >> 8);
+            buf[3] = (byte)((payloadLen & 0x000000FF));
+            buf[4] = 131;
+
+            Array.Copy(eouts.GetBuffer(), 0, buf, 5, eouts.Length); // rest of the buffer copied
 
             stream.Write(buf, 0, buf.Length);
 
@@ -58,20 +76,34 @@ namespace K2Informatics.Erlnet
             MemoryStream resp = new MemoryStream();
             int readCount = 0;
             bool waitForMore = false;
+            payloadLen = 0;
             do
             {
                 readCount = stream.Read(buf, 0, buf.Length);
-                resp.Write(buf, 0, readCount);
-                waitForMore = stream.DataAvailable;
-                if(!waitForMore ) {
-                    try { OtpErlangObject.decode(new OtpInputStream(resp.GetBuffer())); }
-                    catch (OtpErlangDecodeException) { waitForMore = true; }
+                if (resp.Length == 0 && readCount < 4)
+                    throw new ErlnetException("TCP segment too small!");
+
+                if (resp.Length == 0 && readCount >= 4)
+                {
+                    // added payload size (including protocol id byte)
+                    // and the missing protocol id byte after it
+                    payloadLen = ((uint)buf[3] & 0x000000FF)
+                               + (((uint)buf[2] << 8) & 0x0000FF00)
+                               + (((uint)buf[1] << 16) & 0x00FF0000)
+                               + (((uint)buf[0] << 24) & 0xFF000000);
+                    resp.Write(buf, 4, readCount - 4);
                 }
+                else
+                    resp.Write(buf, 0, readCount);
+
+                waitForMore = stream.DataAvailable;
+                if (!waitForMore && resp.Length < payloadLen)
+                    waitForMore = true;
             } while (waitForMore);
 
             // rebuild term
             OtpErlangTuple res = (OtpErlangTuple)OtpErlangObject.decode(new OtpInputStream(resp.GetBuffer()));
-            Console.WriteLine("RX "+res.elementAt(0).ToString());
+            //Console.WriteLine("RX " + res.elementAt(0).ToString());
             OtpErlangObject resObj = res.elementAt(1);
             return resObj;
         }
