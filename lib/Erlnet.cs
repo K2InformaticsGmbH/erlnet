@@ -69,7 +69,15 @@ namespace K2Informatics.Erlnet
             stream.Write(buf, 0, buf.Length);
 
             // wait for data
-            while (!stream.DataAvailable) Thread.Sleep(100);
+            DateTime startToWaitForData = DateTime.Now;
+            int waitCount = 0;
+            while (!stream.DataAvailable)
+            {
+                if ((DateTime.Now - startToWaitForData).Seconds > Properties.Settings.Default.StreamResponseTimeout)
+                    throw new ErlnetException("Response timeout in call to " + module + ":" + function);
+                else
+                    Thread.Sleep(0);
+            }
 
             // read till empty
             buf = new byte[1024];
