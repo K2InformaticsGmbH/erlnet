@@ -31,7 +31,7 @@ namespace K2Informatics.Erlnet
         /// <param name="function">Erlang function atom</param>
         /// <param name="args">Function arguments (maybe empty/null)</param>
         /// <returns></returns>
-        public static OtpErlangObject CallMFASync(NetworkStream stream,
+        public static OtpErlangObject CallMFASync(ErlStream stream,
             string module, string function, OtpErlangObject[] args)
         {
             OtpErlangObject[] mfaArray = null;
@@ -70,7 +70,6 @@ namespace K2Informatics.Erlnet
 
             // wait for data
             DateTime startToWaitForData = DateTime.Now;
-            int waitCount = 0;
             while (!stream.DataAvailable)
             {
                 if ((DateTime.Now - startToWaitForData).Seconds > Properties.Settings.Default.StreamResponseTimeout)

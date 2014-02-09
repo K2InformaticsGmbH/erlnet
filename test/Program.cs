@@ -14,7 +14,7 @@ namespace test
             TcpClient client = new TcpClient("localhost", 8125);
             NetworkStream s = client.GetStream();
 
-            OtpErlangObject o = Erlnet.CallMFASync(s, "io", "format", null);
+            OtpErlangObject o = Erlnet.CallMFASync(new ErlStream(s), "io", "format", null);
             Console.WriteLine(o.ToString());
         }
     }
