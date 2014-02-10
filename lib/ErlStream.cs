@@ -14,12 +14,17 @@ namespace K2Informatics.Erlnet
 
         public ErlStream(NetworkStream ns) { _stream = ns; }
         public ErlStream(SslStream ssl) { _stream = ssl; }
- 
+
+        public bool CanRead
+        {
+            get { return _stream.CanRead; }
+        }
+
         public bool DataAvailable
         {
             get
             {
-                if (_stream.GetType() == typeof(SslStream))
+                if (_stream.GetType() == typeof(SslStream))                
                     return true;
                 else
                     return ((NetworkStream)_stream).DataAvailable;
@@ -36,5 +41,11 @@ namespace K2Informatics.Erlnet
         {
             return _stream.Read(buffer, offset, count);
         }
+
+        public void Flush()
+        {
+            _stream.Flush();
+        }
+
     }
 }

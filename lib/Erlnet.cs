@@ -79,40 +79,43 @@ namespace K2Informatics.Erlnet
             }
 
             // read till empty
-            buf = new byte[1024];
-            MemoryStream resp = new MemoryStream();
             int readCount = 0;
-            bool waitForMore = false;
             payloadLen = 0;
+
+            // read payload length (4 byte header)
+            byte[] payloadbuf = new byte[4];
+            do {
+                readCount += stream.Read(payloadbuf, readCount, payloadbuf.Length - readCount);
+                if (readCount != 4)
+                    continue;
+                else
+                    payloadLen = ((uint)payloadbuf[3] & 0x000000FF)
+                               + (((uint)payloadbuf[2] << 8) & 0x0000FF00)
+                               + (((uint)payloadbuf[1] << 16) & 0x00FF0000)
+                               + (((uint)payloadbuf[0] << 24) & 0xFF000000);
+                break;
+            } while(true);
+            //Console.WriteLine("RX " + payloadLen + " bytes");
+
+            // read the payload of length 'payloadLen'
+            readCount = 0;
+            buf = new byte[payloadLen];
+            MemoryStream resp = new MemoryStream();
             do
             {
-                readCount = stream.Read(buf, 0, buf.Length);
-                if (resp.Length == 0 && readCount < 4)
-                    throw new ErlnetException("TCP segment too small!");
-
-                if (resp.Length == 0 && readCount >= 4)
-                {
-                    // added payload size (including protocol id byte)
-                    // and the missing protocol id byte after it
-                    payloadLen = ((uint)buf[3] & 0x000000FF)
-                               + (((uint)buf[2] << 8) & 0x0000FF00)
-                               + (((uint)buf[1] << 16) & 0x00FF0000)
-                               + (((uint)buf[0] << 24) & 0xFF000000);
-                    resp.Write(buf, 4, readCount - 4);
-                }
+                readCount += stream.Read(buf, readCount, buf.Length - readCount);
+                if (readCount != payloadLen)
+                    continue;
                 else
-                    resp.Write(buf, 0, readCount);
-
-                waitForMore = stream.DataAvailable;
-                if (!waitForMore && resp.Length < payloadLen)
-                    waitForMore = true;
-            } while (waitForMore);
+                    break;
+            } while (true);
 
             // rebuild term
+            resp.Write(buf, 0, buf.Length);
             OtpErlangTuple res = (OtpErlangTuple)OtpErlangObject.decode(new OtpInputStream(resp.GetBuffer()));
+
             //Console.WriteLine("RX " + res.elementAt(0).ToString());
-            OtpErlangObject resObj = res.elementAt(1);
-            return resObj;
+            return res.elementAt(1);
         }
 
         public static OtpErlangObject UnwrapResult(OtpErlangObject obj)
