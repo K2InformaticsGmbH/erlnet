@@ -139,6 +139,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy $(TargetPath) $(ProjectDir)..\..\erlimemnet\lib\</PostBuildEvent>
+    <PostBuildEvent>copy """$(TargetPath)""" """$(ProjectDir)..\..\erlimemnet\lib\"""</PostBuildEvent>
   </PropertyGroup>
 </Project>
