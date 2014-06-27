@@ -118,17 +118,24 @@ namespace K2Informatics.Erlnet
             return res.elementAt(1);
         }
 
-        public static OtpErlangObject UnwrapResult(OtpErlangObject obj)
+        public static object[] UnwrapResult(OtpErlangObject obj)
         {
+            OtpErlangObject uwobj = null;
             if (obj is OtpErlangTuple
                 && ((OtpErlangTuple)obj).arity() == 2
                 && ((OtpErlangTuple)obj).elementAt(0) is OtpErlangAtom
                 && ((OtpErlangAtom)((OtpErlangTuple)obj).elementAt(0)).atomValue() == "ok")
-                return ((OtpErlangTuple)obj).elementAt(1);
-            else return obj;
+                uwobj = ((OtpErlangTuple)obj).elementAt(1);
+            else uwobj = obj;
+            if (uwobj is OtpErlangTuple)
+                return ((OtpErlangTuple)uwobj).elements();
+            else if (uwobj is OtpErlangList)
+                return ((OtpErlangList)uwobj).elements();
+            else
+                return new object[] { uwobj };
         }
 
-        public static ArrayList TranslateResult(OtpErlangObject result)
+        /*public static ArrayList TranslateResult(OtpErlangObject result)
         {
             ArrayList res = new ArrayList();
 
@@ -170,6 +177,6 @@ namespace K2Informatics.Erlnet
                 else
                     res.Add(erlO.ToString());
             }
-        }
+        }*/
     }
 }
