@@ -135,7 +135,7 @@ namespace K2Informatics.Erlnet
                 return new object[] { uwobj };
         }
 
-        /*public static ArrayList TranslateResult(OtpErlangObject result)
+        public static ArrayList TranslateResult(OtpErlangObject result)
         {
             ArrayList res = new ArrayList();
 
@@ -177,6 +177,6 @@ namespace K2Informatics.Erlnet
                 else
                     res.Add(erlO.ToString());
             }
-        }*/
+        }
     }
 }
