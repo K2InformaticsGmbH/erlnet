@@ -9,11 +9,6 @@ using System.Collections;
 
 namespace K2Informatics.Erlnet
 {
-    public enum ErlType
-    {
-        EString = 1
-    };
-
     public class ErlnetException : Exception
     {
         public ErlnetException() { }
