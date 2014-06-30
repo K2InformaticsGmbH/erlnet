@@ -134,49 +134,5 @@ namespace K2Informatics.Erlnet
             else
                 return new object[] { uwobj };
         }
-
-        public static ArrayList TranslateResult(OtpErlangObject result)
-        {
-            ArrayList res = new ArrayList();
-
-            if (result is OtpErlangTuple)
-                TranslateToArray(res, ((OtpErlangTuple)result).elements());
-            else if (result is OtpErlangList)
-                TranslateToArray(res, ((OtpErlangList)result).elements());
-
-            return res;
-        }
-
-        private static void TranslateToArray(ArrayList res, OtpErlangObject[] elements)
-        {
-            foreach (OtpErlangObject erlO in elements)
-            {
-                // Leaf node
-                if ((erlO is OtpErlangTuple)
-                  && (((OtpErlangTuple)erlO).arity() == 2)
-                  && (((OtpErlangTuple)erlO).elementAt(0) is OtpErlangLong))
-                {
-                    ErlType mtyp = (ErlType)((OtpErlangLong)((OtpErlangTuple)erlO).elementAt(0)).intValue();
-                    OtpErlangObject oeo = ((OtpErlangTuple)erlO).elementAt(1);
-                    switch (mtyp)
-                    {
-                        case ErlType.EString:
-                            if (oeo is OtpErlangString)
-                                res.Add(((OtpErlangString)oeo).stringValue());
-                            else if (oeo is OtpErlangBinary)
-                                res.Add(((OtpErlangBinary)oeo).stringValue());
-                            else if (oeo is OtpErlangList && ((OtpErlangList)oeo).arity() == 0)
-                                res.Add("");
-                            break;
-                        default:
-                            throw new Exception("Unknown type " + erlO.ToString());
-                    }
-                }
-                else if (erlO is OtpErlangTuple || (erlO is OtpErlangList && ((OtpErlangList)erlO).arity() > 0))
-                    res.Add(TranslateResult(erlO));
-                else
-                    res.Add(erlO.ToString());
-            }
-        }
     }
 }
