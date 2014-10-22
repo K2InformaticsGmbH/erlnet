@@ -127,6 +127,7 @@ namespace K2Informatics.Erlnet
             else if (uwobj is OtpErlangList)
                 return ((OtpErlangList)uwobj).elements();
             else
+                // TODO: use OtpErlangObject[] instead
                 return new object[] { uwobj };
         }
     }
